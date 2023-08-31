@@ -1,0 +1,12 @@
+from onnxscript import opset15 as op
+from onnxscript import script
+
+
+@script()
+def sumprod(x, N):
+    sum = op.Identity(x)
+    prod = op.Identity(x)
+    for i in range(N):
+        sum = sum + x
+        prod = prod * x
+    return sum, prod
